@@ -4,6 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../hooks/useSubscription';
 import { stripeProducts } from '../stripe-config';
+import { supabase } from '../lib/supabase';
 
 const Pricing: React.FC = () => {
   const { isDarkMode } = useTheme();
@@ -17,10 +18,13 @@ const Pricing: React.FC = () => {
     setLoading(priceId);
 
     try {
+      const { data } = await supabase.auth.getSession();
+      const accessToken = data.session?.access_token;
+
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
