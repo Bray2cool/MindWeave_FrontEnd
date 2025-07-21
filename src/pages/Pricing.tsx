@@ -21,6 +21,9 @@ const Pricing: React.FC = () => {
       const { data } = await supabase.auth.getSession();
       const accessToken = data.session?.access_token;
 
+      console.log("accessToken", accessToken);
+      console.log("fetching", `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`);
+
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
         method: 'POST',
         headers: {
