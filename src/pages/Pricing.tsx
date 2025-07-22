@@ -18,11 +18,16 @@ const Pricing: React.FC = () => {
     setLoading(priceId);
 
     try {
+      console.log('Starting checkout process...', { priceId, mode, user: user.id });
+      
       const { data } = await supabase.auth.getSession();
       const accessToken = data.session?.access_token;
 
-      console.log("accessToken", accessToken);
-      console.log("fetching", `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`);
+      if (!accessToken) {
+        throw new Error('No access token available. Please sign in again.');
+      }
+
+      console.log('Making request to:', `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`);
 
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
         method: 'POST',
@@ -38,18 +43,24 @@ const Pricing: React.FC = () => {
         }),
       });
 
-      const data = await response.json();
+      console.log('Response status:', response.status);
+      
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to create checkout session');
+        throw new Error(responseData.error || `HTTP ${response.status}: Failed to create checkout session`);
       }
 
-      if (data.url) {
-        window.location.href = data.url;
+      if (responseData.url) {
+        console.log('Redirecting to Stripe checkout:', responseData.url);
+        window.location.href = responseData.url;
+      } else {
+        throw new Error('No checkout URL received from server');
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Failed to start checkout process. Please try again.');
+      alert(`Failed to start checkout: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setLoading(null);
     }
