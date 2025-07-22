@@ -103,7 +103,6 @@ const Pricing: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Free Plan */}
           <div className={`${cardClass} rounded-2xl p-8 border relative`}>
@@ -145,10 +144,10 @@ const Pricing: React.FC = () => {
             <div key={product.priceId} className={`${cardClass} rounded-2xl p-8 border relative ${product.mode === 'subscription' ? 'ring-2 ring-purple-500' : ''}`}>
               {product.mode === 'subscription' && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
-                  <Crown className="w-4 h-4 mr-2" />
-                  Most Popular
-                </div>
+                  <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
+                    <Crown className="w-4 h-4 mr-2" />
+                    Most Popular
+                  </div>
                 </div>
               )}
               
