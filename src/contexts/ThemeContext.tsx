@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 interface ThemeContextType {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  isSidebarOpen: boolean;
+  toggleSidebar: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -21,6 +23,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return saved ? JSON.parse(saved) : true; // Default to dark mode
   });
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
     
@@ -36,8 +40,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setIsDarkMode(!isDarkMode);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode, isSidebarOpen, toggleSidebar }}>
       {children}
     </ThemeContext.Provider>
   );

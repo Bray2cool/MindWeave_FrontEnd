@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import SubscriptionStatus from './SubscriptionStatus';
 
 const Sidebar: React.FC = () => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode, isSidebarOpen, toggleSidebar } = useTheme();
   const location = useLocation();
   const { signOut, user } = useAuth();
 
@@ -34,14 +34,28 @@ const Sidebar: React.FC = () => {
     : 'bg-gradient-to-b from-purple-600 to-purple-700';
 
   return (
-    <div className={`w-64 ${sidebarClass} min-h-screen flex flex-col shadow-2xl`}>
+    <>
+      {/* Overlay for mobile */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+      
+      <div className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed lg:relative lg:translate-x-0 w-64 ${sidebarClass} min-h-screen flex flex-col shadow-2xl transition-transform duration-300 ease-in-out z-50`}>
       {/* Header */}
       <div className={`p-6 border-b ${isDarkMode ? 'border-purple-700/50' : 'border-purple-600/50'}`}>
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent">
             MindWeave
           </h1>
-          <Menu className="text-white/70 w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+          <button 
+            onClick={toggleSidebar}
+            className="text-white/70 w-5 h-5 cursor-pointer hover:text-white transition-colors"
+          >
+            <Menu />
+          </button>
         </div>
       </div>
 
@@ -95,6 +109,7 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
