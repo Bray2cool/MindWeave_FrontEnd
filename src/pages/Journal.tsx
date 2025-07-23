@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { ArrowUp, Smile, Meh, Frown, Menu, X } from 'lucide-react';
+import { ArrowUp, Smile, Meh, Frown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { supabase } from '../lib/supabase';
 import ContextualLinks from '../components/ContextualLinks';
-import Sidebar from '../components/Sidebar';
 
 const Journal: React.FC = () => {
-  const { isDarkMode, isSidebarOpen, toggleSidebar } = useTheme();
+  const { isDarkMode } = useTheme();
   const [journalText, setJournalText] = useState('');
   const [selectedMood, setSelectedMood] = useState<'happy' | 'neutral' | 'sad' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -94,28 +93,8 @@ const Journal: React.FC = () => {
   const textSecondaryClass = isDarkMode ? 'text-white/70' : 'text-gray-600';
 
   return (
-    <>
-      <Sidebar />
-      <div className={`min-h-screen flex items-center justify-center ${bgClass} transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : 'lg:ml-0'}`}>
-        {/* Mobile menu button */}
-        <button
-          onClick={toggleSidebar}
-          className={`${isSidebarOpen ? 'lg:hidden' : ''} fixed top-4 left-4 z-30 p-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg shadow-lg transition-colors`}
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-        
-        {/* Desktop close button when sidebar is open */}
-        {isSidebarOpen && (
-          <button
-            onClick={toggleSidebar}
-            className="hidden lg:block fixed top-4 left-72 z-30 p-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-lg shadow-lg transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        )}
-
-        <div className="max-w-2xl w-full text-center px-4">
+    <div className={`min-h-screen flex items-center justify-center ${bgClass}`}>
+      <div className="max-w-2xl w-full text-center">
         <div className="mb-8">
           <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-2xl">
             <div className="text-white font-bold text-2xl tracking-wider">
@@ -187,8 +166,7 @@ const Journal: React.FC = () => {
           <ContextualLinks context="journal" className="justify-center" />
         </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 };
 
