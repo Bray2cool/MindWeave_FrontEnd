@@ -96,7 +96,7 @@ const Journal: React.FC = () => {
     <div className={`min-h-screen flex items-center justify-center ${bgClass}`}>
       <div className="max-w-2xl w-full text-center">
         <div className="mb-8">
-          <div className="w-40 h-40 mx-auto mb-6 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-2xl p-6">
+          <div className="w-80 h-80 mx-auto mb-6 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-2xl p-12">
             <img 
               src="/src/components/MindWeave.png" 
               alt="MindWeave Logo" 
