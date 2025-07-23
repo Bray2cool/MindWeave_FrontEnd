@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 import FloatingActionButton from './FloatingActionButton';
+import Breadcrumbs from './Breadcrumbs';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface LayoutProps {
@@ -22,7 +23,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           <Menu className="w-6 h-6" />
         </button>
-        {children}
+        <div className="p-8">
+          <Breadcrumbs />
+          {children}
+        </div>
         <FloatingActionButton />
       </main>
     </div>

@@ -58,7 +58,7 @@ const Settings: React.FC = () => {
   const textSecondaryClass = isDarkMode ? 'text-white/70' : 'text-gray-600';
 
   return (
-    <div className={`p-8 min-h-screen ${bgClass}`}>
+    <div className={`min-h-screen ${bgClass}`}>
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent mb-2">

@@ -3,6 +3,7 @@ import { ArrowUp, Smile, Meh, Frown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { supabase } from '../lib/supabase';
+import ContextualLinks from '../components/ContextualLinks';
 
 const Journal: React.FC = () => {
   const { isDarkMode } = useTheme();
@@ -92,7 +93,7 @@ const Journal: React.FC = () => {
   const textSecondaryClass = isDarkMode ? 'text-white/70' : 'text-gray-600';
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-8 ${bgClass}`}>
+    <div className={`min-h-screen flex items-center justify-center ${bgClass}`}>
       <div className="max-w-2xl w-full text-center">
         <div className="mb-8">
           <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-2xl">
@@ -159,6 +160,11 @@ const Journal: React.FC = () => {
             Mood selected: {selectedMood === 'happy' ? '😊 Happy' : selectedMood === 'neutral' ? '😐 Neutral' : '😔 Sad'}
           </p>
         )}
+
+        {/* Contextual Navigation */}
+        <div className="mt-8 pt-6 border-t border-white/10">
+          <ContextualLinks context="journal" className="justify-center" />
+        </div>
       </div>
     </div>
   );

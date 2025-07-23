@@ -10,6 +10,7 @@ import Pricing from './pages/Pricing';
 import Success from './pages/Success';
 import Settings from './pages/Settings';
 import Journal from './pages/Journal';
+import SEOHead from './components/SEOHead';
 
 const AppContent: React.FC = () => {
   const { user, loading } = useAuth();
@@ -28,6 +29,7 @@ const AppContent: React.FC = () => {
 
   return (
     <Router>
+      <SEOHead />
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
         <Layout>
           <Routes>

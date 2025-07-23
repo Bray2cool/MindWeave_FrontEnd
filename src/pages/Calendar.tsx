@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useJournalEntries } from '../hooks/useJournalEntries';
 import EntryModal from '../components/EntryModal';
+import ContextualLinks from '../components/ContextualLinks';
 
 const Calendar: React.FC = () => {
   const { isDarkMode } = useTheme();
@@ -91,13 +92,16 @@ const Calendar: React.FC = () => {
   const textSecondaryClass = isDarkMode ? 'text-white/70' : 'text-gray-600';
 
   return (
-    <div className={`p-8 min-h-screen ${bgClass}`}>
+    <div className={`min-h-screen ${bgClass}`}>
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className={`text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2`}>
             Calendar
           </h1>
           <p className={`${textSecondaryClass} text-lg`}>Track your journaling journey through time.</p>
+          <div className="mt-4">
+            <ContextualLinks context="calendar" />
+          </div>
         </div>
 
         <div className={`${cardClass} rounded-2xl p-6 border`}>

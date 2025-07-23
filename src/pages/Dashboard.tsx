@@ -2,6 +2,8 @@ import React from 'react';
 import { BarChart3, TrendingUp, Calendar, BookOpen } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useJournalEntries } from '../hooks/useJournalEntries';
+import ContextualLinks from '../components/ContextualLinks';
+import InternalLink from '../components/InternalLink';
 
 const Dashboard: React.FC = () => {
   const { isDarkMode } = useTheme();
@@ -84,11 +86,17 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className={`p-8 min-h-screen ${bgClass}`}>
+    <div className={`min-h-screen ${bgClass}`}>
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">Dashboard</h1>
           <p className={`${textSecondaryClass} text-lg`}>Welcome back! Here's your journaling overview.</p>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="mb-8">
+          <h2 className={`text-xl font-semibold ${textClass} mb-4`}>Quick Actions</h2>
+          <ContextualLinks context="dashboard" />
         </div>
 
         {/* Stats Grid */}
@@ -127,11 +135,19 @@ const Dashboard: React.FC = () => {
               <BookOpen className={`w-12 h-12 ${textSecondaryClass} mx-auto mb-4`} />
               <p className={`${textSecondaryClass} text-lg`}>No entries yet</p>
               <p className={`${textSecondaryClass} text-sm mt-2`}>Start journaling to see your recent entries here!</p>
+              <div className="mt-6">
+                <ContextualLinks context="empty-state" />
+              </div>
             </div>
           ) : (
             <div className="space-y-4">
               {getRecentEntries().map((entry) => (
-                <div key={entry.id} className={`${isDarkMode ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-50 hover:bg-gray-100'} rounded-lg p-4 transition-colors cursor-pointer`}>
+                <InternalLink
+                  key={entry.id}
+                  to="/calendar"
+                  className={`block ${isDarkMode ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-50 hover:bg-gray-100'} rounded-lg p-4 transition-colors`}
+                  aria-label={`View entry from ${new Date(entry.created_at).toLocaleDateString()} in calendar`}
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
@@ -157,8 +173,26 @@ const Dashboard: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </InternalLink>
               ))}
+              <div className="mt-6 pt-4 border-t border-white/10">
+                <div className="flex justify-center space-x-4">
+                  <InternalLink
+                    to="/calendar"
+                    variant="button"
+                    aria-label="View all entries in calendar format"
+                  >
+                    View All Entries
+                  </InternalLink>
+                  <InternalLink
+                    to="/journal"
+                    variant="subtle"
+                    aria-label="Write a new journal entry"
+                  >
+                    Write New Entry
+                  </InternalLink>
+                </div>
+              </div>
             </div>
           )}
         </div>
