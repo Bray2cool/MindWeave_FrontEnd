@@ -48,11 +48,13 @@ const Sidebar: React.FC = () => {
       <div className={`p-6 border-b ${isDarkMode ? 'border-purple-700/50' : 'border-purple-600/50'}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img 
-              src="/src/components/MindWeave.png" 
-              alt="MindWeave Logo" 
-              className="w-10 h-10 object-contain"
-            />
+            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+              <img 
+                src="/src/components/MindWeave.png" 
+                alt="MindWeave Logo" 
+                className="w-10 h-10 object-contain"
+              />
+            </div>
             <h1 className="text-xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent">
               MindWeave
             </h1>
