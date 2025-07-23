@@ -20,6 +20,10 @@ export const useTheme = () => {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
     // Check if we're on mobile (screen width < 1024px)
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
     return !isMobile; // Default to open on desktop, closed on mobile
@@ -37,9 +41,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isSidebarOpen]);
-  });
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
