@@ -96,10 +96,12 @@ const Journal: React.FC = () => {
     <div className={`min-h-screen flex items-center justify-center ${bgClass}`}>
       <div className="max-w-2xl w-full text-center">
         <div className="mb-8">
-          <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-2xl">
-            <div className="text-white font-bold text-2xl tracking-wider">
-              MW
-            </div>
+          <div className="w-40 h-40 mx-auto mb-6 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 rounded-full flex items-center justify-center shadow-2xl p-6">
+            <img 
+              src="/src/components/MindWeave.png" 
+              alt="MindWeave Logo" 
+              className="w-full h-full object-contain"
+            />
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent mb-4">
             MindWeave

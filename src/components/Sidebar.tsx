@@ -47,9 +47,16 @@ const Sidebar: React.FC = () => {
       {/* Header */}
       <div className={`p-6 border-b ${isDarkMode ? 'border-purple-700/50' : 'border-purple-600/50'}`}>
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent">
-            MindWeave
-          </h1>
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/src/components/MindWeave.png" 
+              alt="MindWeave Logo" 
+              className="w-10 h-10 object-contain"
+            />
+            <h1 className="text-xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent">
+              MindWeave
+            </h1>
+          </div>
           <button 
             onClick={toggleSidebar}
             className="text-white/70 w-5 h-5 cursor-pointer hover:text-white transition-colors lg:hidden"
