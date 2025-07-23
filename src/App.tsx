@@ -24,25 +24,62 @@ const AppContent: React.FC = () => {
   }
 
   if (!user) {
-    return <Auth />;
+    return (
+      <Router>
+        <SEOHead />
+        <Auth />
+      </Router>
+    );
   }
 
   return (
     <Router>
       <SEOHead />
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/journal" element={<Journal />} />
-          </Routes>
-        </Layout>
-      </div>
+      <Routes>
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/" element={
+          <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Layout>
+              <Dashboard />
+            </Layout>
+          </div>
+        } />
+        <Route path="/dashboard" element={
+          <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Layout>
+              <Dashboard />
+            </Layout>
+          </div>
+        } />
+        <Route path="/calendar" element={
+          <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Layout>
+              <Calendar />
+            </Layout>
+          </div>
+        } />
+        <Route path="/pricing" element={
+          <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Layout>
+              <Pricing />
+            </Layout>
+          </div>
+        } />
+        <Route path="/success" element={
+          <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Layout>
+              <Success />
+            </Layout>
+          </div>
+        } />
+        <Route path="/settings" element={
+          <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Layout>
+              <Settings />
+            </Layout>
+          </div>
+        } />
+      </Routes>
     </Router>
   );
 };
