@@ -43,7 +43,7 @@ const Sidebar: React.FC = () => {
         />
       )}
       
-      <div className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed lg:relative lg:translate-x-0 w-64 ${sidebarClass} min-h-screen flex flex-col shadow-2xl transition-transform duration-300 ease-in-out z-50`}>
+      <div className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed w-64 ${sidebarClass} min-h-screen flex flex-col shadow-2xl transition-transform duration-300 ease-in-out z-50`}>
       {/* Header */}
       <div className={`p-6 border-b ${isDarkMode ? 'border-purple-700/50' : 'border-purple-600/50'}`}>
         <div className="flex items-center justify-between">
@@ -52,7 +52,7 @@ const Sidebar: React.FC = () => {
           </h1>
           <button 
             onClick={toggleSidebar}
-            className="text-white/70 w-5 h-5 cursor-pointer hover:text-white transition-colors"
+            className="text-white/70 w-5 h-5 cursor-pointer hover:text-white transition-colors lg:hidden"
           >
             <Menu />
           </button>
