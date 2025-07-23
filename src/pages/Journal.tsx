@@ -9,8 +9,35 @@ const Journal: React.FC = () => {
   const [journalText, setJournalText] = useState('');
   const [selectedMood, setSelectedMood] = useState<'happy' | 'neutral' | 'sad' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
   const { user } = useAuth();
 
+  const journalPrompts = [
+    "What's something you've been putting off?",
+    "How did you challenge yourself today?",
+    "What made you smile this week?",
+    "What are you most grateful for right now?",
+    "Describe a moment when you felt truly proud of yourself",
+    "What would you tell your younger self?",
+    "What's one thing you learned today?",
+    "How do you want to feel tomorrow?",
+    "What's been weighing on your mind lately?",
+    "What small victory can you celebrate today?",
+    "What's something you're looking forward to?",
+    "How have you grown in the past month?",
+    "What would make today feel complete?",
+    "What's a fear you've been facing lately?",
+    "What brings you the most peace?",
+  ];
+
+  // Rotate prompts every 4 seconds
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPromptIndex((prev) => (prev + 1) % journalPrompts.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [journalPrompts.length]);
   const moods = [
     { id: 'happy', icon: Smile, color: 'text-green-500 hover:text-green-400', bgColor: 'bg-green-500/20 border-green-500' },
     { id: 'neutral', icon: Meh, color: 'text-yellow-500 hover:text-yellow-400', bgColor: 'bg-yellow-500/20 border-yellow-500' },
@@ -76,7 +103,14 @@ const Journal: React.FC = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent mb-4">
             MindWeave
           </h1>
-          <p className={`${textSecondaryClass} text-lg italic`}>What's something you've been putting off?</p>
+          <div className="h-8 flex items-center justify-center mb-2">
+            <p 
+              key={currentPromptIndex}
+              className={`${textSecondaryClass} text-lg italic text-center max-w-md animate-fade-in-up`}
+            >
+              {journalPrompts[currentPromptIndex]}
+            </p>
+          </div>
         </div>
 
         {/* Mood Selection */}
