@@ -57,6 +57,8 @@ const Journal: React.FC = () => {
             content: journalText.trim(),
             mood: selectedMood,
           });
+          .select('id')
+          .single();
 
         if (error) {
           console.error('Error saving journal entry:', error);
@@ -64,6 +66,38 @@ const Journal: React.FC = () => {
           return;
         }
 
+        // Generate AI reflection for the journal entry
+        try {
+          const { data: sessionData } = await supabase.auth.getSession();
+          const accessToken = sessionData.session?.access_token;
+
+          if (accessToken) {
+            console.log('Generating reflection for entry:', data.id);
+            
+            const reflectionResponse = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-reflection`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                journal_entry_id: data.id,
+                journal_content: journalText.trim(),
+              }),
+            });
+
+            if (reflectionResponse.ok) {
+              const reflectionData = await reflectionResponse.json();
+              console.log('Reflection generated successfully:', reflectionData);
+            } else {
+              const errorData = await reflectionResponse.json();
+              console.error('Failed to generate reflection:', errorData);
+            }
+          }
+        } catch (reflectionError) {
+          console.error('Error generating reflection:', reflectionError);
+          // Don't show this error to user since the main journal entry was saved successfully
+        }
         alert('Journal entry saved successfully!');
         setJournalText('');
         setSelectedMood(null);
