@@ -54,10 +54,15 @@ export const useJournalEntries = () => {
   }, [user]);
 
   const getEntriesForDate = (date: Date) => {
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = date.getFullYear() + '-' + 
+      String(date.getMonth() + 1).padStart(2, '0') + '-' + 
+      String(date.getDate()).padStart(2, '0');
     return entries.filter(entry => {
-      const entryDate = new Date(entry.created_at).toISOString().split('T')[0];
-      return entryDate === dateStr;
+      const entryDate = new Date(entry.created_at);
+      const entryDateStr = entryDate.getFullYear() + '-' + 
+        String(entryDate.getMonth() + 1).padStart(2, '0') + '-' + 
+        String(entryDate.getDate()).padStart(2, '0');
+      return entryDateStr === dateStr;
     });
   };
 
