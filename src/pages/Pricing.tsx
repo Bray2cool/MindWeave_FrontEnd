@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Crown, Loader2 } from 'lucide-react';
+import { Check, Crown, Loader2, Clock } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../hooks/useSubscription';
@@ -13,6 +13,9 @@ const Pricing: React.FC = () => {
   const [loading, setLoading] = useState<string | null>(null);
 
   const handleCheckout = async (priceId: string, mode: 'payment' | 'subscription') => {
+    // Prevent checkout while in coming soon mode
+    return;
+    
     if (!user) return;
 
     setLoading(priceId);
@@ -92,7 +95,28 @@ const Pricing: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen ${bgClass}`}>
+    <div className={`min-h-screen ${bgClass} relative`}>
+      {/* Coming Soon Overlay */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+        <div className={`${cardClass} rounded-2xl p-8 border max-w-md mx-4 text-center`}>
+          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Clock className="w-8 h-8 text-white" />
+          </div>
+          <h2 className={`text-2xl font-bold ${textClass} mb-4`}>Coming Soon</h2>
+          <p className={`${textSecondaryClass} mb-6`}>
+            We're currently working on exciting new AI-powered features for MindWeave. 
+            Premium subscriptions will be available once these features are ready.
+          </p>
+          <div className={`${isDarkMode ? 'bg-white/10' : 'bg-gray-100'} rounded-lg p-4`}>
+            <p className={`${textSecondaryClass} text-sm`}>
+              🤖 AI-powered journal insights<br/>
+              ✨ Personalized reflections<br/>
+              📊 Advanced mood analytics
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent mb-4">
@@ -206,27 +230,18 @@ const Pricing: React.FC = () => {
 
               <button
                 onClick={() => handleCheckout(product.priceId, product.mode)}
-                disabled={loading === product.priceId || isCurrentPlan(product.priceId)}
-                className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
+                disabled={true}
+                className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 cursor-not-allowed ${
                   isCurrentPlan(product.priceId)
                     ? isDarkMode 
-                      ? 'bg-green-500/20 text-green-400 cursor-not-allowed' 
-                      : 'bg-green-100 text-green-700 cursor-not-allowed'
-                    : loading === product.priceId
-                    ? 'bg-purple-600/50 text-white cursor-not-allowed'
-                    : 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white hover:scale-105'
+                      ? 'bg-gray-600/50 text-gray-400' 
+                      : 'bg-gray-300/50 text-gray-500'
+                    : isDarkMode
+                    ? 'bg-gray-600/50 text-gray-400'
+                    : 'bg-gray-300/50 text-gray-500'
                 }`}
               >
-                {loading === product.priceId ? (
-                  <div className="flex items-center justify-center">
-                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                    Processing...
-                  </div>
-                ) : isCurrentPlan(product.priceId) ? (
-                  'Current Plan'
-                ) : (
-                  product.mode === 'subscription' ? 'Upgrade Now' : 'Buy Lifetime'
-                )}
+                Coming Soon
               </button>
             </div>
           ))}
