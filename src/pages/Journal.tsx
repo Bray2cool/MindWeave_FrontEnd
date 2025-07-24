@@ -56,7 +56,7 @@ const Journal: React.FC = () => {
             user_id: user.id,
             content: journalText.trim(),
             mood: selectedMood,
-          });
+          })
           .select('id')
           .single();
 
