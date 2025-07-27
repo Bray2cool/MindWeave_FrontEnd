@@ -123,7 +123,7 @@ const Dashboard: React.FC = () => {
           
           {/* Privacy Mode Overlay */}
           {isPrivacyMode && (
-            <div className="absolute inset-0 bg-gray-500/80 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
+            <div className="absolute inset-0 bg-gray-500 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
               <div className="text-center">
                 <div className="w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
