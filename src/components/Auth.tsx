@@ -56,7 +56,7 @@ const Auth: React.FC = () => {
         <div className="text-center mb-8">
           <div className={`w-32 h-32 mx-auto mb-6 bg-gradient-to-br ${colors.primary} rounded-full flex items-center justify-center shadow-2xl p-4`}>
             <img 
-              src="/src/components/MindWeave.png" 
+              src="/MindWeave.png" 
               alt="MindWeave Logo" 
               className="w-full h-full object-contain"
             />
@@ -81,7 +81,6 @@ const Auth: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 ${isDarkMode ? 'bg-white/10 border-white/20 text-white placeholder-white/50' : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500'} border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
                   className={`w-full pl-10 pr-4 py-3 ${isDarkMode ? 'bg-white/10 border-white/20 text-white placeholder-white/50' : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500'} border rounded-lg focus:outline-none focus:ring-2 ${colors.ring} focus:border-transparent`}
                   placeholder="Enter your email"
                   required
@@ -99,7 +98,6 @@ const Auth: React.FC = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full pl-10 pr-12 py-3 ${isDarkMode ? 'bg-white/10 border-white/20 text-white placeholder-white/50' : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500'} border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent`}
                   className={`w-full pl-10 pr-12 py-3 ${isDarkMode ? 'bg-white/10 border-white/20 text-white placeholder-white/50' : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500'} border rounded-lg focus:outline-none focus:ring-2 ${colors.ring} focus:border-transparent`}
                   placeholder="Enter your password"
                   required

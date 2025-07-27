@@ -178,43 +178,7 @@ const Journal: React.FC = () => {
     }
   };
 
-  const testApiConnection = async () => {
-    try {
-      console.log('Testing API connection...');
-      let apiUrl = import.meta.env.VITE_REFLECTION_API_URL;
-      
-      if (!apiUrl || apiUrl.includes('VITE_REFLECTION_API_URL')) {
-        apiUrl = 'https://mind-be-ruddy.vercel.app';
-      }
-      
-      const fullUrl = apiUrl + '/api/analyze';
-      console.log('Testing API at:', fullUrl);
-      
-      const response = await fetch(fullUrl, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ entry_text: 'This is a test entry' }),
-      });
 
-      console.log('Test response status:', response.status);
-      
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Test API response:', data);
-        alert('API connection successful! Check console for details.');
-      } else {
-        const errorText = await response.text();
-        console.error('Test API error:', errorText);
-        alert(`API test failed: ${response.status} ${response.statusText}`);
-      }
-    } catch (error) {
-      console.error('Test API error:', error);
-      alert('API test failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
-    }
-  };
 
   const bgClass = `bg-gradient-to-br ${isDarkMode ? colors.darkBg : colors.lightBg}`;
   
@@ -326,15 +290,7 @@ const Journal: React.FC = () => {
           </div>
         )}
 
-        {/* Test API Button */}
-        <div className="mt-4">
-          <button
-            onClick={testApiConnection}
-            className={`px-4 py-2 rounded-lg ${isDarkMode ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'} transition-colors`}
-          >
-            Test API Connection
-          </button>
-        </div>
+
 
         {/* Contextual Navigation */}
         <div className="mt-8 pt-6 border-t border-white/10">

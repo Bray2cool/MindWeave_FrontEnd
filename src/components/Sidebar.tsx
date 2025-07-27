@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
           <div className="flex items-center space-x-3">
             <div className={`w-12 h-12 bg-gradient-to-br ${colors.primary} rounded-full flex items-center justify-center shadow-lg overflow-hidden`}>
               <img 
-                src="/src/components/MindWeave.png" 
+                src="/MindWeave.png" 
                 alt="MindWeave Logo" 
                 className="w-10 h-10 object-contain"
               />
