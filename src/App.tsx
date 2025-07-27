@@ -12,7 +12,6 @@ import Success from './pages/Success';
 import Settings from './pages/Settings';
 import Journal from './pages/Journal';
 import SEOHead from './components/SEOHead';
-import DebugInfo from './components/DebugInfo';
 
 const AppContent: React.FC = () => {
   const { user, loading } = useAuth();
@@ -48,7 +47,6 @@ const AppContent: React.FC = () => {
             <Route path="/journal" element={<Journal />} />
           </Routes>
         </Layout>
-        <DebugInfo />
       </div>
     </Router>
   );
